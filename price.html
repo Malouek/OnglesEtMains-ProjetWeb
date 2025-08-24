@@ -1,0 +1,355 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Prestations - Beauty Salon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/price.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Beauty Salon</a>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#prestations">Prestations</a></li>
+                <li><a href="#equipe">Équipe</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" class="nav-cta">Réserver</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#prestations">Prestations</a></li>
+                    <li><a href="#equipe">Équipe</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="nav-cta">Réserver</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="header">
+            <h1>Prestations</h1>
+            <p>L'art de sublimer votre beauté naturelle dans un cadre d'exception</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card" onclick="openModal('soins')">
+                <div class="service-number">01</div>
+                <h3 class="service-title">Soins Visage</h3>
+                <p class="service-description">Rituels personnalisés pour révéler l'éclat de votre peau</p>
+                <span class="service-count">8 Soins</span>
+            </div>
+
+            <div class="service-card" onclick="openModal('maquillage')">
+                <div class="service-number">02</div>
+                <h3 class="service-title">Maquillage</h3>
+                <p class="service-description">L'art du maquillage professionnel pour chaque occasion</p>
+                <span class="service-count">6 Prestations</span>
+            </div>
+
+            <div class="service-card" onclick="openModal('ongles')">
+                <div class="service-number">03</div>
+                <h3 class="service-title">Manucure</h3>
+                <p class="service-description">Excellence et raffinement pour des mains parfaites</p>
+                <span class="service-count">7 Services</span>
+            </div>
+
+            <div class="service-card" onclick="openModal('epilation')">
+                <div class="service-number">04</div>
+                <h3 class="service-title">Épilation</h3>
+                <p class="service-description">Techniques douces pour une peau soyeuse</p>
+                <span class="service-count">12 Zones</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <h2>Réservez votre moment</h2>
+        <p>Offrez-vous l'excellence d'un soin sur mesure</p>
+        <a href="#" class="cta-button">Prendre Rendez-vous</a>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-soins" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Soins Visage</h2>
+                <span class="close" onclick="closeModal('soins')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Soin Coup D'éclat</h4>
+                        <p>Rituel d'hydratation intense aux actifs naturels pour tous types de peaux</p>
+                        <div class="service-duration">30 minutes</div>
+                    </div>
+                    <div class="service-price">35€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Soin Douceur</h4>
+                        <p>Protocole premium anti-rides et raffermissant aux technologies avancées</p>
+                        <div class="service-duration">45 minutes</div>
+                    </div>
+                    <div class="service-price">55€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Soin Acide Hyaluronique</h4>
+                        <p>Détoxification en profondeur pour peaux mixtes à grasses</p>
+                        <div class="service-duration">60 minutes</div>
+                    </div>
+                    <div class="service-price">65€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Soin Collagène</h4>
+                        <p>Illuminateur de teint pour une peau radieuse et unifiée</p>
+                        <div class="service-duration">90 minutes</div>
+                    </div>
+                    <div class="service-price">70€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Soins Visage homme</h4>
+                        <p>Exfoliation mécanique haute précision pour peau lisse</p>
+                        <div class="service-duration">60 minutes</div>
+                    </div>
+                    <div class="service-price">55€</div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-maquillage" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Maquillage</h2>
+                <span class="close" onclick="closeModal('maquillage')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Maquillage Jour Signature</h4>
+                        <p>Look naturel et sophistiqué pour un quotidien sublimé</p>
+                        <div class="service-duration">45 minutes</div>
+                    </div>
+                    <div class="service-price">60€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Maquillage Soirée Couture</h4>
+                        <p>Création glamour et raffinée pour vos événements</p>
+                        <div class="service-duration">60 minutes</div>
+                    </div>
+                    <div class="service-price">85€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Maquillage Mariée Prestige</h4>
+                        <p>Look parfait incluant essai et retouches le jour J</p>
+                        <div class="service-duration">2 heures</div>
+                    </div>
+                    <div class="service-price">180€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Cours Maquillage Personnel</h4>
+                        <p>Maîtrisez les techniques avec vos produits personnels</p>
+                        <div class="service-duration">2 heures</div>
+                    </div>
+                    <div class="service-price">120€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Design Sourcils Architecture</h4>
+                        <p>Restructuration complète pour un regard parfait</p>
+                        <div class="service-duration">30 minutes</div>
+                    </div>
+                    <div class="service-price">45€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Teinture Cils & Sourcils</h4>
+                        <p>Intensification naturelle du regard</p>
+                        <div class="service-duration">45 minutes</div>
+                    </div>
+                    <div class="service-price">40€</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-ongles" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Manucure</h2>
+                <span class="close" onclick="closeModal('ongles')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Manucure Classique Luxe</h4>
+                        <p>Soin complet avec vernis haute qualité et finition parfaite</p>
+                        <div class="service-duration">45 minutes</div>
+                    </div>
+                    <div class="service-price">45€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Manucure Semi-Permanent</h4>
+                        <p>Vernis gel longue tenue jusqu'à 3 semaines</p>
+                        <div class="service-duration">60 minutes</div>
+                    </div>
+                    <div class="service-price">65€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Extensions Ongles Résine</h4>
+                        <p>Rallongement naturel et résistant</p>
+                        <div class="service-duration">90 minutes</div>
+                    </div>
+                    <div class="service-price">80€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Nail Art Création</h4>
+                        <p>Décoration artistique personnalisée sur manucure</p>
+                        <div class="service-duration">30 minutes</div>
+                    </div>
+                    <div class="service-price">25€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Soin Mains Premium</h4>
+                        <p>Gommage, masque et massage aux huiles précieuses</p>
+                        <div class="service-duration">30 minutes</div>
+                    </div>
+                    <div class="service-price">35€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Pédicure Spa</h4>
+                        <p>Soin complet des pieds avec bain relaxant</p>
+                        <div class="service-duration">75 minutes</div>
+                    </div>
+                    <div class="service-price">60€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>French Manucure Parfaite</h4>
+                        <p>Élégance intemporelle en gel ou traditionnel</p>
+                        <div class="service-duration">50 minutes</div>
+                    </div>
+                    <div class="service-price">50€</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-epilation" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Épilation</h2>
+                <span class="close" onclick="closeModal('epilation')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Sourcils Précision</h4>
+                        <p>Épilation minutieuse à la cire chaude</p>
+                    </div>
+                    <div class="service-price">20€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Lèvre Supérieure</h4>
+                        <p>Traitement délicat de la zone sensible</p>
+                    </div>
+                    <div class="service-price">18€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Menton</h4>
+                        <p>Épilation douce et précise</p>
+                    </div>
+                    <div class="service-price">20€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Aisselles</h4>
+                        <p>Épilation complète avec soin apaisant</p>
+                    </div>
+                    <div class="service-price">25€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Bras Complets</h4>
+                        <p>Des épaules aux poignets avec finition parfaite</p>
+                    </div>
+                    <div class="service-price">45€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Demi-Jambes</h4>
+                        <p>Genoux aux chevilles avec soin hydratant</p>
+                    </div>
+                    <div class="service-price">40€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Jambes Complètes</h4>
+                        <p>Épilation intégrale avec protocole confort</p>
+                    </div>
+                    <div class="service-price">60€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Maillot Classique</h4>
+                        <p>Épilation des contours avec cire délicate</p>
+                    </div>
+                    <div class="service-price">35€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Maillot Échancré</h4>
+                        <p>Plus étendu que le classique</p>
+                    </div>
+                    <div class="service-price">40€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Maillot Intégral</h4>
+                        <p>Épilation complète avec technique experte</p>
+                    </div>
+                    <div class="service-price">55€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Dos Complet</h4>
+                        <p>Traitement intégral du dos</p>
+                    </div>
+                    <div class="service-price">50€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Torse Complet</h4>
+                        <p>Épilation masculine professionnelle</p>
+                    </div>
+                    <div class="service-price">45€</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/price.js"></script>
+</html>
