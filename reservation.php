@@ -1,10 +1,21 @@
+<?php
+require_once 'backend/php/dbconnect.php';
+$db = new DBConnect();
+$pdo = $db->getConnexion();
+
+// Récupérer les catégories
+$stmt = $pdo->prepare("SELECT id_categorie, nom_categorie FROM categories");
+$stmt->execute();
+$categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Réservation - Ongles et Mains</title>
-	<link rel="stylesheet" href="css/reservation.css">
+    <link rel="stylesheet" href="css/reservation.css">
 </head>
 <body>
     <header class="header">
@@ -45,17 +56,27 @@
                     <strong>Date sélectionnée: </strong><span id="selectedDateText"></span>
                 </div>
 
-                <form id="bookingForm">
+                <form id="bookingForm" action="backend/php/booking.php" method="POST">
+                    <input type="hidden" id="selectedDate" name="selectedDate">
+                    <input type="hidden" id="selectedTime" name="selectedTime">
+
+                    <div class="form-group">
+                        <label for="categorie">Catégorie *</label>
+                        <select id="categorie" name="categorie" required>
+                            <option value="">Choisir une catégorie</option>
+                            <?php foreach ($categories as $categorie): ?>
+                                <option value="<?= htmlspecialchars($categorie['id_categorie']) ?>">
+                                    <?= htmlspecialchars($categorie['nom_categorie']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="service">Prestation *</label>
                         <select id="service" name="service" required>
                             <option value="">Choisir une prestation</option>
-                            <option value="manucure-classique">Manucure Classique - 35€</option>
-                            <option value="manucure-gel">Manucure Gel - 45€</option>
-                            <option value="pose-faux-ongles">Pose Faux Ongles - 55€</option>
-                            <option value="nail-art">Nail Art - 25€</option>
-                            <option value="french-manucure">French Manucure - 40€</option>
-                            <option value="soin-mains">Soin des Mains - 30€</option>
+                            <!-- Les prestations seront ajoutées dynamiquement via JS selon la catégorie sélectionnée -->
                         </select>
                     </div>
 
@@ -103,6 +124,7 @@
             </div>
         </div>
     </div>
-	<script src="js/reservation.js"></script>
+    <script src="js/reservation.js"></script>
 </body>
 </html>
+

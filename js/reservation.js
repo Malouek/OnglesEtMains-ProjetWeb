@@ -15,6 +15,7 @@ class BookingCalendar {
 	init() {
 		this.renderCalendar();
 		this.bindEvents();
+		this.initCategorySelect();
 	}
 
 	bindEvents() {
@@ -48,15 +49,10 @@ class BookingCalendar {
 		const year = this.currentDate.getFullYear();
 		const month = this.currentDate.getMonth();
 		
-		// Update month display
-		document.getElementById('currentMonth').textContent = 
-			`${this.monthNames[month]} ${year}`;
-
-		// Clear calendar grid
+		document.getElementById('currentMonth').textContent = `${this.monthNames[month]} ${year}`;
 		const grid = document.getElementById('calendarGrid');
 		grid.innerHTML = '';
 
-		// Add day headers
 		this.dayNames.forEach(day => {
 			const dayHeader = document.createElement('div');
 			dayHeader.classList.add('calendar-day-header');
@@ -64,19 +60,16 @@ class BookingCalendar {
 			grid.appendChild(dayHeader);
 		});
 
-		// Get first day of month and number of days
 		const firstDay = new Date(year, month, 1).getDay();
 		const daysInMonth = new Date(year, month + 1, 0).getDate();
 		const today = new Date();
 
-		// Add empty cells for days before month starts
 		for (let i = 0; i < firstDay; i++) {
 			const emptyDay = document.createElement('div');
 			emptyDay.classList.add('calendar-day');
 			grid.appendChild(emptyDay);
 		}
 
-		// Add days of the month
 		for (let day = 1; day <= daysInMonth; day++) {
 			const dayButton = document.createElement('button');
 			dayButton.classList.add('calendar-day');
@@ -84,14 +77,12 @@ class BookingCalendar {
 			
 			const dayDate = new Date(year, month, day);
 			
-			// Disable past dates
 			if (dayDate < today.setHours(0, 0, 0, 0)) {
 				dayButton.classList.add('disabled');
 				dayButton.disabled = true;
 			} else {
 				dayButton.addEventListener('click', () => {
-					document.querySelectorAll('.calendar-day.selected').forEach(d => 
-						d.classList.remove('selected'));
+					document.querySelectorAll('.calendar-day.selected').forEach(d => d.classList.remove('selected'));
 					dayButton.classList.add('selected');
 					this.selectedDate = new Date(year, month, day);
 					this.updateSelectedDateDisplay();
@@ -104,12 +95,7 @@ class BookingCalendar {
 
 	updateSelectedDateDisplay() {
 		if (this.selectedDate) {
-			const options = { 
-				weekday: 'long', 
-				year: 'numeric', 
-				month: 'long', 
-				day: 'numeric' 
-			};
+			const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 			const dateString = this.selectedDate.toLocaleDateString('fr-FR', options);
 			document.getElementById('selectedDateText').textContent = dateString;
 			document.getElementById('selectedDateDisplay').style.display = 'block';
@@ -127,31 +113,63 @@ class BookingCalendar {
 			return;
 		}
 
-		const formData = new FormData(document.getElementById('bookingForm'));
-		const data = Object.fromEntries(formData);
-		
-		// Add selected date and time
-		data.date = this.selectedDate.toLocaleDateString('fr-FR');
-		data.time = this.selectedTime;
+		const form = document.getElementById('bookingForm');
+		const formData = new FormData(form);
 
-		// Here you would typically send the data to your server
-		console.log('Booking data:', data);
-		
-		alert(`Merci ${data.firstName} ! Votre rendez-vous pour le ${data.date} à ${data.time} a été enregistré. Nous vous contacterons rapidement pour confirmer.`);
-		
-		// Reset form
-		document.getElementById('bookingForm').reset();
-		document.querySelectorAll('.calendar-day.selected').forEach(d => 
-			d.classList.remove('selected'));
-		document.querySelectorAll('.time-slot.selected').forEach(s => 
-			s.classList.remove('selected'));
-		document.getElementById('selectedDateDisplay').style.display = 'none';
-		this.selectedDate = null;
-		this.selectedTime = null;
+		formData.set('selectedDate', this.selectedDate.toISOString().split('T')[0]);
+		formData.set('selectedTime', this.selectedTime);
+
+		fetch('backend/php/booking.php', {
+			method: 'POST',
+			body: formData
+		})
+		.then(response => response.text())
+		.then(message => {
+			alert(message);
+			form.reset();
+			document.querySelectorAll('.calendar-day.selected').forEach(d => d.classList.remove('selected'));
+			document.querySelectorAll('.time-slot.selected').forEach(s => s.classList.remove('selected'));
+			document.getElementById('selectedDateDisplay').style.display = 'none';
+			this.selectedDate = null;
+			this.selectedTime = null;
+		})
+		.catch(error => {
+			console.error('Erreur:', error);
+			alert('Une erreur est survenue lors de la réservation. Veuillez réessayer.');
+		});
+	}
+
+	initCategorySelect() {
+		const categorySelect = document.getElementById('categorie');
+		const prestationSelect = document.getElementById('service');
+
+		if (!categorySelect || !prestationSelect) return;
+
+		categorySelect.addEventListener('change', () => {
+			const catId = categorySelect.value;
+			if (!catId) {
+				prestationSelect.innerHTML = '<option value="">Choisir une prestation</option>';
+				return;
+			}
+
+			// === Correction ici : paramètre GET doit être categorie_id ===
+			fetch(`backend/php/getPrestations.php?categorie_id=${catId}`)
+				.then(response => response.json())
+				.then(data => {
+					prestationSelect.innerHTML = '<option value="">Choisir une prestation</option>';
+					data.forEach(prestation => {
+						const option = document.createElement('option');
+						option.value = prestation.id_prestation;
+						option.textContent = prestation.nom_prestation;
+						prestationSelect.appendChild(option);
+					});
+				})
+				.catch(error => console.error('Erreur récupération prestations :', error));
+		});
 	}
 }
 
-// Initialize calendar when page loads
 document.addEventListener('DOMContentLoaded', () => {
 	new BookingCalendar();
 });
+
