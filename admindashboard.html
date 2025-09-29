@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Admin — Ongles Et Mains</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admindashboard.css" />
+</head>
+<body>
+  <header class="admin-header">
+    <div class="header-content">
+      <div class="brand">
+        <div class="brand-icon">💅</div>
+        <div class="brand-text">
+          <h1>Ongles Et Mains</h1>
+          <span>Dashboard Administrateur</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="week-nav">
+          <button class="nav-btn" id="prevWeek" aria-label="Semaine précédente">◀</button>
+          <input type="date" id="anchorDate" />
+          <button class="nav-btn" id="nextWeek" aria-label="Semaine suivante">▶</button>
+        </div>
+
+        <div class="status-legend">
+          <div class="legend-item">
+            <span class="legend-dot confirmed"></span>
+            <span>Confirmée</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot pending"></span>
+            <span>En attente</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot cancelled"></span>
+            <span>Annulée</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Calendar Panel -->
+    <section class="panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <h2>Planning Hebdomadaire</h2>
+          <span class="week-label" id="weekLabel"></span>
+        </div>
+      </div>
+
+      <div class="calendar-wrapper">
+        <div class="calendar" id="calendar"></div>
+      </div>
+    </section>
+
+    <!-- Reservations Table Panel -->
+    <section class="panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <h2>Réservations</h2>
+        </div>
+
+        <div class="table-controls">
+          <select id="statusFilter" aria-label="Filtrer par statut">
+            <option value="all">Toutes les réservations</option>
+            <option value="pending">En attente</option>
+            <option value="confirmed">Confirmées</option>
+            <option value="cancelled">Annulées</option>
+          </select>
+          <input type="search" id="searchInput" placeholder="🔍 Rechercher..." />
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table" id="reservationsTable">
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Prestation</th>
+              <th>Date</th>
+              <th>Horaire</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <template id="eventTemplate">
+    <div class="event">
+      <div class="event-title"></div>
+      <div class="event-time"></div>
+    </div>
+  </template>
+
+  <script>
+    const reservations = [
+      { id: 1, client: "Camille R.", service: "Manucure classique", date: "2025-09-29", start: "10:00", end: "11:00", status: "confirmed" },
+      { id: 2, client: "Léa M.", service: "Pose de gel", date: "2025-09-30", start: "14:30", end: "16:00", status: "pending" },
+      { id: 3, client: "Nora M.", service: "Dépose + soin", date: "2025-10-01", start: "09:00", end: "09:45", status: "confirmed" },
+      { id: 4, client: "Sophie T.", service: "Remplissage gel", date: "2025-10-02", start: "13:00", end: "14:00", status: "cancelled" },
+      { id: 5, client: "Aïcha L.", service: "Semi-permanent", date: "2025-10-03", start: "11:15", end: "12:15", status: "pending" },
+      { id: 6, client: "Julie D.", service: "Nail art", date: "2025-10-04", start: "15:00", end: "16:30", status: "confirmed" }
+    ];
+
+    const HOURS_START = 8, HOURS_END = 20;
+
+    const toDate = (iso) => new Date(iso + "T00:00:00");
+    const formatDate = (d) => d.toLocaleDateString("fr-FR", { weekday: "long", day: "2-digit", month: "2-digit" });
+    const formatRangeLabel = (start, end) => {
+      const opts = { day: "2-digit", month: "long", year: "numeric" };
+      return `${start.toLocaleDateString("fr-FR", opts)} — ${end.toLocaleDateString("fr-FR", opts)}`;
+    };
+    const startOfWeek = (anchor) => {
+      const d = new Date(anchor);
+      const day = (d.getDay() + 6) % 7;
+      d.setDate(d.getDate() - day);
+      d.setHours(0,0,0,0);
+      return d;
+    };
+    const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+
+    function renderCalendar(anchorDate) {
+      const cal = document.getElementById("calendar");
+      cal.innerHTML = "";
+      const weekStart = startOfWeek(anchorDate);
+      const weekEnd = addDays(weekStart, 6);
+      document.getElementById("weekLabel").textContent = formatRangeLabel(weekStart, weekEnd);
+
+      const header = document.createElement("div");
+      header.className = "cal-header";
+      header.appendChild(document.createElement("div"));
+      for (let i = 0; i < 7; i++) {
+        const d = addDays(weekStart, i);
+        const cell = document.createElement("div");
+        cell.className = "cal-day-header";
+        cell.innerHTML = `
+          <span class="day-name">${d.toLocaleDateString("fr-FR", { weekday: "short" })}</span>
+          <span class="day-date">${d.toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" })}</span>
+        `;
+        header.appendChild(cell);
+      }
+      cal.appendChild(header);
+
+      const grid = document.createElement("div");
+      grid.className = "cal-grid";
+
+      const hoursCol = document.createElement("div");
+      hoursCol.className = "hours-column";
+      for (let h = HOURS_START; h < HOURS_END; h++) {
+        const hc = document.createElement("div");
+        hc.className = "hour-label";
+        hc.textContent = String(h).padStart(2, "0") + ":00";
+        hoursCol.appendChild(hc);
+      }
+      grid.appendChild(hoursCol);
+
+      for (let i = 0; i < 7; i++) {
+        const dayCol = document.createElement("div");
+        dayCol.className = "day-column";
+        dayCol.dataset.dayIndex = i;
+        for (let h = HOURS_START; h < HOURS_END; h++) {
+          const slot = document.createElement("div");
+          slot.className = "time-slot";
+          dayCol.appendChild(slot);
+        }
+        grid.appendChild(dayCol);
+      }
+      cal.appendChild(grid);
+
+      const eventsThisWeek = reservations.filter(r => {
+        const d = toDate(r.date);
+        return d >= weekStart && d <= weekEnd;
+      });
+      for (const r of eventsThisWeek) {
+        placeEvent(r, weekStart);
+      }
+    }
+
+    function timeToPixels(timeStr) {
+      const [hh, mm] = timeStr.split(":").map(Number);
+      return ((hh - HOURS_START) * 70) + ((mm / 60) * 70);
+    }
+
+    function placeEvent(res, weekStart) {
+      const d = toDate(res.date);
+      const dayIndex = Math.round((d - weekStart) / (1000*60*60*24));
+      const column = document.querySelector(`.day-column[data-day-index="${dayIndex}"]`);
+      if (!column) return;
+
+      const tpl = document.getElementById("eventTemplate");
+      const node = tpl.content.firstElementChild.cloneNode(true);
+      node.querySelector(".event-title").textContent = res.client + " — " + res.service;
+      node.querySelector(".event-time").textContent = res.start + "–" + res.end;
+      node.classList.add(res.status);
+
+      node.style.top = timeToPixels(res.start) + "px";
+      const durMin = (new Date(`1970-01-01T${res.end}:00`) - new Date(`1970-01-01T${res.start}:00`)) / 60000;
+      node.style.height = (durMin / 60) * 70 + "px";
+
+      column.appendChild(node);
+    }
+
+    function renderTable() {
+      const body = document.querySelector("#reservationsTable tbody");
+      body.innerHTML = "";
+      const filter = document.getElementById("statusFilter").value;
+      const q = document.getElementById("searchInput").value.toLowerCase().trim();
+
+      const filtered = reservations.filter(r => {
+        const matchStatus = filter === "all" ? true : r.status === filter;
+        const matchQuery = q === "" ? true : (r.client + " " + r.service).toLowerCase().includes(q);
+        return matchStatus && matchQuery;
+      }).sort((a,b) => (a.date + a.start).localeCompare(b.date + b.start));
+
+      for (const r of filtered) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${r.client}</td>
+          <td>${r.service}</td>
+          <td>${new Date(r.date).toLocaleDateString("fr-FR")}</td>
+          <td>${r.start}–${r.end}</td>
+          <td><span class="badge ${r.status}">${statusLabel(r.status)}</span></td>
+          <td class="actions">
+            <button class="btn-action accept" data-id="${r.id}">✓ Accepter</button>
+            <button class="btn-action cancel" data-id="${r.id}">✕ Annuler</button>
+          </td>
+        `;
+        body.appendChild(tr);
+      }
+    }
+
+    function statusLabel(s) {
+      return s === "pending" ? "En attente" : s === "confirmed" ? "Confirmée" : "Annulée";
+    }
+
+    function attachTableActions() {
+      document.body.addEventListener("click", (e) => {
+        if (e.target.matches(".accept")) {
+          const id = Number(e.target.dataset.id);
+          const r = reservations.find(x => x.id === id);
+          if (r) { 
+            r.status = "confirmed"; 
+            refreshUI();
+          }
+        }
+        if (e.target.matches(".cancel")) {
+          const id = Number(e.target.dataset.id);
+          const r = reservations.find(x => x.id === id);
+          if (r) { 
+            r.status = "cancelled"; 
+            refreshUI();
+          }
+        }
+      });
+    }
+
+    function refreshUI() {
+      const anchor = document.getElementById("anchorDate").value || new Date().toISOString().slice(0,10);
+      renderCalendar(anchor);
+      renderTable();
+    }
+
+    function initNav() {
+      const input = document.getElementById("anchorDate");
+      const todayISO = new Date().toISOString().slice(0,10);
+      input.value = todayISO;
+
+      document.getElementById("prevWeek").addEventListener("click", () => {
+        const d = new Date(input.value);
+        d.setDate(d.getDate() - 7);
+        input.value = d.toISOString().slice(0,10);
+        refreshUI();
+      });
+      
+      document.getElementById("nextWeek").addEventListener("click", () => {
+        const d = new Date(input.value);
+        d.setDate(d.getDate() + 7);
+        input.value = d.toISOString().slice(0,10);
+        refreshUI();
+      });
+      
+      input.addEventListener("change", refreshUI);
+      document.getElementById("statusFilter").addEventListener("change", renderTable);
+      document.getElementById("searchInput").addEventListener("input", renderTable);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      initNav();
+      attachTableActions();
+      refreshUI();
+    });
+  </script>
+</body>
+</html>

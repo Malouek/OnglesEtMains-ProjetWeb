@@ -10,14 +10,14 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">Beauty Salon</a>
+            <a href="#" class="logo">Ongles Et Mains</a>
             <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#prestations">Prestations</a></li>
-                <li><a href="#equipe">Équipe</a></li>
-                <li><a href="#galerie">Galerie</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#" class="nav-cta">Réserver</a></li>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="price.html">Prestations</a></li>
+                <li><a href="about.html">Équipe</a></li>
+                <li><a href="#galerie">Nos Produits</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="reservation.php" class="nav-cta">Réserver</a></li>
             </ul>
             <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
                 <span></span>
@@ -29,7 +29,7 @@
                     <li><a href="#accueil">Accueil</a></li>
                     <li><a href="#prestations">Prestations</a></li>
                     <li><a href="#equipe">Équipe</a></li>
-                    <li><a href="#galerie">Galerie</a></li>
+                    <li><a href="#galerie">Nos Produits</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="#" class="nav-cta">Réserver</a></li>
                 </ul>
@@ -76,7 +76,7 @@
     <div class="cta-section">
         <h2>Réservez votre moment</h2>
         <p>Offrez-vous l'excellence d'un soin sur mesure</p>
-        <a href="#" class="cta-button">Prendre Rendez-vous</a>
+        <a href="reservation.php" class="cta-button">Prendre Rendez-vous</a>
     </div>
 
     <!-- Modals -->
@@ -142,7 +142,7 @@
                     <div class="service-details">
                         <h4>Teinture Cil</h4>
                         <p>Look naturel et sophistiqué pour un quotidien sublimé</p>
-                        <div class="service-duration">45 minutes</div>
+                        <div class="service-duration">25 minutes</div>
                     </div>
                     <div class="service-price">16€</div>
                 </div>
@@ -150,41 +150,33 @@
                     <div class="service-details">
                         <h4>Teinture Sourcils</h4>
                         <p>Création glamour et raffinée pour vos événements</p>
-                        <div class="service-duration">60 minutes</div>
+                        <div class="service-duration">15 minutes</div>
                     </div>
                     <div class="service-price">10€</div>
                 </div>
                 <div class="service-item">
                     <div class="service-details">
-                        <h4>Maquillage Mariée Prestige</h4>
+                        <h4>Maquillage Jour</h4>
+                        <p>Look parfait incluant essai et retouches le jour J</p>
+                        <div class="service-duration">1 heure</div>
+                    </div>
+                    <div class="service-price">23€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Maquillage Soirée</h4>
                         <p>Look parfait incluant essai et retouches le jour J</p>
                         <div class="service-duration">2 heures</div>
                     </div>
-                    <div class="service-price">180€</div>
+                    <div class="service-price">25€</div>
                 </div>
                 <div class="service-item">
                     <div class="service-details">
-                        <h4>Cours Maquillage Personnel</h4>
-                        <p>Maîtrisez les techniques avec vos produits personnels</p>
-                        <div class="service-duration">2 heures</div>
-                    </div>
-                    <div class="service-price">120€</div>
-                </div>
-                <div class="service-item">
-                    <div class="service-details">
-                        <h4>Design Sourcils Architecture</h4>
+                        <h4>Maquillage Mariage</h4>
                         <p>Restructuration complète pour un regard parfait</p>
-                        <div class="service-duration">30 minutes</div>
+                        <div class="service-duration">?</div>
                     </div>
-                    <div class="service-price">45€</div>
-                </div>
-                <div class="service-item">
-                    <div class="service-details">
-                        <h4>Teinture Cils & Sourcils</h4>
-                        <p>Intensification naturelle du regard</p>
-                        <div class="service-duration">45 minutes</div>
-                    </div>
-                    <div class="service-price">40€</div>
+                    <div class="service-price">Sur devis</div>
                 </div>
             </div>
         </div>
@@ -199,47 +191,48 @@
             <div class="modal-body">
                 <div class="service-item">
                     <div class="service-details">
-                        <h4>Manucure Classique Luxe</h4>
-                        <p>Soin complet avec vernis haute qualité et finition parfaite</p>
+                        <h4>Manucure Classique</h4>
+                        <p>Soin de haute qualité et finition parfaite</p>
                         <div class="service-duration">45 minutes</div>
                     </div>
-                    <div class="service-price">45€</div>
+                    <div class="service-price">21€</div>
                 </div>
                 <div class="service-item">
                     <div class="service-details">
-                        <h4>Manucure Semi-Permanent</h4>
+                        <h4>Manucure + Vernis</h4>
                         <p>Vernis gel longue tenue jusqu'à 3 semaines</p>
                         <div class="service-duration">60 minutes</div>
                     </div>
-                    <div class="service-price">65€</div>
+                    <div class="service-price">29€</div>
                 </div>
                 <div class="service-item">
                     <div class="service-details">
-                        <h4>Extensions Ongles Résine</h4>
-                        <p>Rallongement naturel et résistant</p>
+                        <h4>Beauté des pieds</h4>
+                        <p>Soin complet des pieds avec gommage et hydratation</p>
                         <div class="service-duration">90 minutes</div>
                     </div>
-                    <div class="service-price">80€</div>
+                    <div class="service-price">37€</div>
                 </div>
                 <div class="service-item">
                     <div class="service-details">
-                        <h4>Nail Art Création</h4>
+                        <h4>Beauté des pieds + soin masque & gommage</h4>
                         <p>Décoration artistique personnalisée sur manucure</p>
                         <div class="service-duration">30 minutes</div>
                     </div>
-                    <div class="service-price">25€</div>
+                    <div class="service-price">52€</div>
                 </div>
                 <div class="service-item">
                     <div class="service-details">
-                        <h4>Soin Mains Premium</h4>
+                        <h4>Pose de Vernis
+                        </h4>
                         <p>Gommage, masque et massage aux huiles précieuses</p>
                         <div class="service-duration">30 minutes</div>
                     </div>
-                    <div class="service-price">35€</div>
+                    <div class="service-price">10€</div>
                 </div>
                 <div class="service-item">
                     <div class="service-details">
-                        <h4>Pédicure Spa</h4>
+                        <h4>Capsule + Résine</h4>
                         <p>Soin complet des pieds avec bain relaxant</p>
                         <div class="service-duration">75 minutes</div>
                     </div>
@@ -247,11 +240,51 @@
                 </div>
                 <div class="service-item">
                     <div class="service-details">
-                        <h4>French Manucure Parfaite</h4>
+                        <h4>Capsule + gel</h4>
                         <p>Élégance intemporelle en gel ou traditionnel</p>
                         <div class="service-duration">50 minutes</div>
                     </div>
-                    <div class="service-price">50€</div>
+                    <div class="service-price">60€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Semi permanent</h4>
+                        <p>Élégance intemporelle en gel ou traditionnel</p>
+                        <div class="service-duration">50 minutes</div>
+                    </div>
+                    <div class="service-price">45€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Remplissage Résine</h4>
+                        <p>Élégance intemporelle en gel ou traditionnel</p>
+                        <div class="service-duration">50 minutes</div>
+                    </div>
+                    <div class="service-price">45€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Remplissage Gel renforcé</h4>
+                        <p>Élégance intemporelle en gel ou traditionnel</p>
+                        <div class="service-duration">50 minutes</div>
+                    </div>
+                    <div class="service-price">46€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>Depose + soin</h4>
+                        <p>Élégance intemporelle en gel ou traditionnel</p>
+                        <div class="service-duration">50 minutes</div>
+                    </div>
+                    <div class="service-price">30€</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-details">
+                        <h4>1 ongle</h4>
+                        <p>Élégance intemporelle en gel ou traditionnel</p>
+                        <div class="service-duration">50 minutes</div>
+                    </div>
+                    <div class="service-price">7€</div>
                 </div>
             </div>
         </div>

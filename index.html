@@ -1,30 +1,53 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ongles et Mains - Institut de Beauté</title>
-   <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">ONGLES ET MAINS</div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Ongles Et Mains</a>
             <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#apropos">À propos</a></li>
-                <li><a href="reservation.html">Contact</a></li>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="price.html">Prestations</a></li>
+                <li><a href="about.html">Équipe</a></li>
+                <li><a href="products.html">Nos produits</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="reservation.php" class="nav-cta">Réserver</a></li>
             </ul>
-        </nav>
-    </header>
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#prestations">Prestations</a></li>
+                    <li><a href="#equipe">Équipe</a></li>
+                    <li><a href="#galerie">Nos produits</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="nav-cta">Réserver</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <section id="accueil" class="hero">
         <div class="container">
             <div class="hero-content">
                 <h1>L'art de la beauté naturelle</h1>
-                <p>Découvrez l'excellence dans chaque soin, où luxe et bien-être se rencontrent pour révéler votre beauté authentique dans un cadre d'exception.</p>
-                <a href="#contact" class="cta-button">Prendre Rendez-vous</a>
+                <p>Découvrez l'excellence dans chaque soin, où luxe et bien-être se rencontrent pour révéler votre
+                    beauté authentique dans un cadre d'exception.</p>
+                <a href="reservation.php" class="cta-button">Prendre Rendez-vous</a>
             </div>
         </div>
     </section>
@@ -36,17 +59,20 @@
                 <div class="service-card">
                     <div class="service-icon">💆</div>
                     <h3>Soins Visage Premium</h3>
-                    <p>Traitements personnalisés utilisant les meilleures technologies et produits haut de gamme pour une peau éclatante de santé.</p>
+                    <p>Traitements personnalisés utilisant les meilleures technologies et produits haut de gamme pour
+                        une peau éclatante de santé.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">✨</div>
                     <h3>Soins Corps Signature</h3>
-                    <p>Rituels de bien-être sur-mesure alliant relaxation profonde et techniques d'excellence pour sublimer votre silhouette.</p>
+                    <p>Rituels de bien-être sur-mesure alliant relaxation profonde et techniques d'excellence pour
+                        sublimer votre silhouette.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">💅</div>
                     <h3>Manucure & Pédicure</h3>
-                    <p>Art de l'onglerie dans un environnement raffiné, pour des mains et pieds parfaitement soignés.</p>
+                    <p>Art de l'onglerie dans un environnement raffiné, pour des mains et pieds parfaitement soignés.
+                    </p>
                 </div>
             </div>
         </div>
@@ -56,10 +82,19 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>L'Excellence à votre Service</h2>
-                    <p>Depuis plus de 15 ans, notre institut incarne l'art de vivre français en matière de beauté et de bien-être. Nous avons créé un havre de paix où chaque détail a été pensé pour votre confort.</p>
-                    <p>Nos esthéticiennes diplômées maîtrisent les techniques les plus avancées et utilisent exclusivement des produits premium pour vous offrir des résultats exceptionnels.</p>
-                    <p>Parce que votre beauté est unique, nous personnalisons chaque soin selon vos besoins spécifiques.</p>
+                    <h2>L'Excellence à Votre Service</h2>
+                    <p>Depuis 1995, notre esthéticienne met son expertise au service de la beauté et du bien-être. Forte
+                        d’une expérience de 7 années sur la Côte d’Azur auprès d’une clientèle d’exception, elle a
+                        développé un savoir-faire unique alliant exigence, élégance et efficacité.</p>
+
+                    <p>Depuis plus de 15 ans, notre institut s’inspire de l’art de vivre à la française pour créer un
+                        véritable écrin de sérénité, pensé pour votre confort et votre épanouissement.</p>
+
+                    <p>Chaque soin est réalisé avec des techniques maîtrisées et des produits haut de gamme,
+                        sélectionnés pour leur qualité et leurs résultats visibles.</p>
+
+                    <p>Parce que chaque beauté est singulière, nous personnalisons nos prestations afin de révéler le
+                        meilleur de vous-même.</p>
                 </div>
                 <div class="about-image"></div>
             </div>
@@ -74,22 +109,22 @@
                     <h3>Informations Pratiques</h3>
                     <div class="contact-item">
                         <strong>Adresse</strong><br>
-                        123 Avenue des Champs-Élysées<br>
-                        75008 Paris
+                        153 Rue du Faubourg Bonnefoy<br>
+                        31500 Toulouse, France
                     </div>
                     <div class="contact-item">
                         <strong>Téléphone</strong><br>
-                        01 42 00 00 00
+                        +33 5 61 61 52 00
                     </div>
                     <div class="contact-item">
                         <strong>Horaires</strong><br>
-                        Lundi - Vendredi : 9h - 20h<br>
-                        Samedi : 9h - 18h<br>
-                        Fermé le dimanche
+                        Lundi - Vendredi : 10h - 19h<br>
+                        <br>
+                        Fermé le samedi et dimanche
                     </div>
                     <div class="contact-item">
                         <strong>Email</strong><br>
-                        contact@elegance-institut.fr
+                        onglesetmains@free.fr
                     </div>
                 </div>
                 <form class="contact-form">
@@ -134,4 +169,5 @@
 
     <script src="js/index.js"></script>
 </body>
+
 </html>

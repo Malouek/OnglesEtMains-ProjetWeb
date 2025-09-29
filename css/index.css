@@ -5,7 +5,7 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: #2c2c2c;
             overflow-x: hidden;
@@ -17,56 +17,123 @@
             padding: 0 20px;
         }
         
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+        .navbar {
+            background: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 20px rgba(44, 44, 44, 0.05);
             position: fixed;
-            width: 100%;
             top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(200, 180, 160, 0.3);
+            left: 0;
+            right: 0;
+            z-index: 999;
         }
-        
-        nav {
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
         }
-        
+
         .logo {
-            font-size: 2rem;
-            font-weight: 300;
-            color: #c8b4a0;
-            letter-spacing: 2px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #2c2c2c;
+            text-decoration: none;
+            letter-spacing: -0.01em;
         }
-        
+
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 40px;
+            align-items: center;
         }
-        
+
         .nav-links a {
             text-decoration: none;
             color: #2c2c2c;
-            font-weight: 300;
+            font-weight: 400;
+            font-size: 0.95rem;
             transition: color 0.3s ease;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
         }
-        
+
         .nav-links a:hover {
             color: #c8b4a0;
         }
-        
+
+        .nav-cta {
+            background: linear-gradient(135deg, #c8b4a0, #d4c2b0);
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(200, 180, 160, 0.3);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: #2c2c2c;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(44, 44, 44, 0.1);
+            padding: 30px 40px;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .mobile-nav a {
+            text-decoration: none;
+            color: #2c2c2c;
+            font-weight: 400;
+            font-size: 1rem;
+            padding: 10px 0;
+            border-bottom: 1px solid #f8f5f2;
+        }
+
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, #f8f5f2 0%, #e8ddd4 100%);
+            background: url('../img/imggg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             align-items: center;
             position: relative;

@@ -7,17 +7,34 @@
     <link rel="stylesheet" href="css/about.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">ONGLES ET MAINS</div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Ongles Et Mains</a>
             <ul class="nav-links">
-                <li><a href="#accueil">ACCUEIL</a></li>
-                <li><a href="#services">SERVICES</a></li>
-                <li><a href="#a-propos" class="active">À PROPOS</a></li>
-                <li><a href="#contact">CONTACT</a></li>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="price.html">Prestations</a></li>
+                <li><a href="about.html">Équipe</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="reservation.php" class="nav-cta">Réserver</a></li>
             </ul>
-        </nav>
-    </header>
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#prestations">Prestations</a></li>
+                    <li><a href="#equipe">Équipe</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="nav-cta">Réserver</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <main class="main-content">
         <section class="hero-section">

@@ -3,14 +3,14 @@
 -- ===============================
 
 -- Suppression si déjà existante
-DROP DATABASE IF EXISTS cabinet_esthetique;
+DROP DATABASE IF EXISTS ongleetmain;
 
 -- Création
-CREATE DATABASE cabinet_esthetique
+CREATE DATABASE ongleetmain
   DEFAULT CHARACTER SET utf8mb4
   COLLATE utf8mb4_general_ci;
 
-USE cabinet_esthetique;
+USE ongleetmain;
 
 -- ===============================
 -- Table des clients

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Connexion</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+  <main class="auth-hero">
+    <div class="aura"></div>
+    <section class="auth-card" aria-labelledby="connexionTitle">
+      <div class="brand">
+        <div class="brand-mark">🔒</div>
+        <h1 id="connexionTitle">Connexion Admin</h1>
+        <p class="subtitle">Accès réservé aux administrateurs</p>
+      </div>
+
+      <form class="form" action="#" method="post" novalidate>
+        <div class="field">
+          <label for="email">Adresse e-mail</label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="admin@exemple.fr" />
+          <span class="error" aria-live="polite"></span>
+        </div>
+
+        <div class="field">
+          <label for="password">Mot de passe</label>
+          <div class="password-wrap">
+            <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Votre mot de passe" />
+            <button type="button" class="toggle" aria-label="Afficher le mot de passe" title="Afficher / masquer" data-state="hidden">Afficher</button>
+          </div>
+          <span class="error" aria-live="polite"></span>
+        </div>
+
+        <div class="row">
+          <label class="checkbox">
+            <input type="checkbox" id="remember" name="remember" />
+            <span>Se souvenir de moi</span>
+          </label>
+          <a class="link" href="#">Mot de passe oublié ?</a>
+        </div>
+
+        <button class="cta-button full" type="submit">Se connecter</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // Password show/hide
+    const pwd = document.getElementById('password');
+    const toggle = document.querySelector('.toggle');
+    toggle?.addEventListener('click', ()=>{
+      const isHidden = pwd.type === 'password';
+      pwd.type = isHidden ? 'text' : 'password';
+      toggle.dataset.state = isHidden ? 'visible' : 'hidden';
+      toggle.textContent = isHidden ? 'Masquer' : 'Afficher';
+      toggle.setAttribute('aria-label', isHidden ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+    });
+
+    // Basic client validation feedback
+    const form = document.querySelector('form.form');
+    form?.addEventListener('submit', (e)=>{
+      const email = document.getElementById('email');
+      let valid = true;
+      if(!email.value || !email.checkValidity()) {
+        email.nextElementSibling.textContent = 'Veuillez saisir une adresse e-mail valide.';
+        valid = false;
+      } else {
+        email.nextElementSibling.textContent = '';
+      }
+      if(!pwd.value) {
+        document.querySelectorAll('.error')[1].textContent = 'Veuillez saisir votre mot de passe.';
+        valid = false;
+      } else {
+        document.querySelectorAll('.error')[1].textContent = '';
+      }
+      if(!valid) e.preventDefault();
+    });
+  </script>
+</body>
+</html>
